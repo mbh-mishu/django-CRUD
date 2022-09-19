@@ -1,0 +1,46 @@
+<!doctype html>
+{% extends 'frontapp/home.html' %}
+{% block body_block %}
+
+<h1>Name: {{musicianD.first_name}} {{musicianD.last_name}}</h1>
+<h5>Midea Name: {{musicianD.midea_name}}</h5>
+<h5>Instrument: {{musicianD.instrument}}</h5>
+<h5>Artist Rating: {{albumDA.num_stars__avg}}</h5>
+
+<a href="{% url 'Frontapp:Ed_musician' musicianE_id=musicianD.id %}" class="btn btn-secondary"> Edit</a>
+<a href="{% url 'Frontapp:deleteMusician' musicianE_id=musicianD.id %}" class="btn btn-danger" onclick="return confirm('Are you sure?')"> delete Musician</a>
+<br>
+
+
+<div>
+{% if albumD %}
+<table class="table table-primary" align="center">
+
+    <tr>
+        <th>Album Name</th>
+        <th>Release Date</th>
+        <th>RAting</th>
+        <th>Edit Album</th>
+
+
+    </tr>
+
+    {% for album in albumD %}
+    <tr>
+        <td>{{album.name}}</td>
+        <td>{{album.release_date|date:"d-m-Y"}}</td>
+        <td>{{album.num_stars}}</td>
+        <td><a href="{% url 'Frontapp:Ed_album' AlbumE_id=album.id %}" class="btn btn-submit bg-success ">Edit</a>
+        <a href="{% url 'Frontapp:deleteAlbum' AlbumE_id=album.id %}" class="btn btn-submit bg-danger " onclick="return confirm('Are you sure?')">Delete</a></td>
+    </tr>
+    {% endfor %}
+
+</table>
+{% else %}
+<h3>No Album inserted yet </h3>
+{% endif%}
+</div>
+
+
+
+{% endblock %}

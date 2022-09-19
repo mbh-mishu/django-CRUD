@@ -1,0 +1,29 @@
+<!doctype html>
+{% extends 'frontapp/home.html' %}
+{% block body_block %}
+
+
+{% if musician_list%}
+<h1>Musician List</h1>
+<table class="table table-success">
+    <tr>
+        <th>Formal name </th>
+        <th>Midea name</th>
+        <th>Instrument</th>
+        <th>Edit</th>
+    </tr>
+    {% for musician in musician_list %}
+    <tr>
+        <td><a href="{% url 'Frontapp:MusicianDet' musician_id=musician.id %}">{{musician.first_name}} {{musician.last_name}}</a></td>
+        <td>{{musician.midea_name}}</td>
+        <td>{{musician.instrument}}</td>
+        <td><a href="{% url 'Frontapp:Ed_musician' musicianE_id=musician.id %}" class="btn btn-secondary"> Edit</a>
+        <a href="{% url 'Frontapp:deleteMusician' musicianE_id=musician.id %}" class="btn btn-danger" onclick="return confirm('Are you sure?')"> delete</a></td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<h1>No Musician inserted in the list</h1>
+{% endif%}
+
+{% endblock %}
